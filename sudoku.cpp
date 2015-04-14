@@ -3,10 +3,10 @@
 //
 // Sudoku
 
-// Student Name
-// Student Number
+// Jesús Eduardo Tostado
+// A01224505
 // and
-// Student Name
+// Juan Abdiel Mercado 
 // Student Number
 
 // Standard libraries
