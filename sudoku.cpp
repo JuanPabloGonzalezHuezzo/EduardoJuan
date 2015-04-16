@@ -121,6 +121,14 @@ int main(int argc, char* argv[]) {
     if(userChoice == "write"){
       // ask user for position (row,column) and number
       // check if valid (legal) and modify the board or notify that the move is invalid
+int row,column,number;
+	cout<<"Give me the number of the row"<<endl;
+	cin>>row;
+	cout<<"Give me the number of the column"<<endl;
+	cin>>column;
+	cout<<"Give me the number to enter"<<endl;
+	cin>>number;
+
       continue;
     }
     if(userChoice == "erase"){
