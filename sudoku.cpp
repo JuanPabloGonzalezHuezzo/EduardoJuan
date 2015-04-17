@@ -24,8 +24,16 @@ const int EMPTY = 0;
 int writeBoard(int row, int column, int n, vector< vector<int> >& board){
 	int r=row-1;
 	int c=column-1;
+	if(board[r][c]==EMPTY){
 	board[r][c]=n;
+	}else{
+	cout<<"That was not a valid choice, try again."<<endl;
+	}
 }
+
+//Codigo del eraseBroad que es para volver la tabla a la normalidad
+//int erase
+
 /*
  * creates a board filed with zeroes (empty spaces)
  * we will do this, then populate it from a file with
@@ -52,7 +60,6 @@ void populateBoardFromFile(vector< vector<int> >& board, string filename){
   if(infile.good()){
     for(int r = 0; r < BOARDSIZE ; r++){
       // grab a full line from the file
-	infile >> line;
       for(int c = 0; c < BOARDSIZE ; c++){
 	infile >> cell;
 	board[r][c] = cell;
@@ -142,6 +149,7 @@ int main(int argc, char* argv[]) {
     if(userChoice == "erase"){
       // ask user for position (row,column) to erase
       // check if valid (legal) and modify the board or notify that the move is invalid
+	//eraseBoard(theBoard);
       continue;
     }
     if(userChoice == "quit"){
