@@ -3,7 +3,7 @@
 //
 // Sudoku
 
-// Jesús Eduardo Tostado
+// Jesús Eduardo Tostado Nieto
 // A01224505
 // and
 // Juan Abdiel Mercado 
