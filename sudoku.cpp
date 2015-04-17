@@ -24,15 +24,23 @@ const int EMPTY = 0;
 int writeBoard(int row, int column, int n, vector< vector<int> >& board){
 	int r=row-1;
 	int c=column-1;
-	if(board[r][c]==EMPTY){
+	if(board[r][c]<=EMPTY){
 	board[r][c]=n;
 	}else{
-	cout<<"That was not a valid choice, try again."<<endl;
+	cout<<"That was not a valid move, try again."<<endl;
 	}
 }
 
 //Codigo del eraseBroad que es para volver la tabla a la normalidad
-//int erase
+int eraseBoard(int row, int column, vector< vector<int> >& board_original, vector< vector<int> >& board){
+	int r=row-1;
+	int c=column-1;
+	if(board[r][c]==board_original[r][c]){
+	cout<<"That was not a valid move, try again."<<endl;
+	}else{
+	board[r][c]=0;
+	}	
+}
 
 /*
  * creates a board filed with zeroes (empty spaces)
@@ -100,6 +108,7 @@ int main(int argc, char* argv[]) {
   string filename;
 
   vector< vector<int> > theBoard(BOARDSIZE,vector<int>(BOARDSIZE));
+  vector< vector<int> > theBoard_original(BOARDSIZE,vector<int>(BOARDSIZE));
 
   switch(argc)
     {
@@ -116,6 +125,7 @@ int main(int argc, char* argv[]) {
 
   createZeroBoard(theBoard);
   populateBoardFromFile(theBoard,filename);
+  theBoard_original=theBoard;
 
   cout << "Welcome to the Game of Sudoku" << endl;
   // Here you provide a menu to the user to do what they want
@@ -149,7 +159,13 @@ int main(int argc, char* argv[]) {
     if(userChoice == "erase"){
       // ask user for position (row,column) to erase
       // check if valid (legal) and modify the board or notify that the move is invalid
-	//eraseBoard(theBoard);
+	int row, column;
+	cout<<"Give me the number of the row"<<endl;
+	cin>>row;
+	cout<<"Give me the number of the column"<<endl;
+	cin>>column;
+	eraseBoard(row,column,theBoard_original,theBoard);
+	
       continue;
     }
     if(userChoice == "quit"){
