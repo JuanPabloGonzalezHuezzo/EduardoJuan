@@ -20,7 +20,12 @@ using namespace std;
 
 const int BOARDSIZE = 9;
 const int EMPTY = 0;
-
+//Codigo del writeBoard que es para poder modificar el tablero
+int writeBoard(int row, int column, int n, vector< vector<int> >& board){
+	int r=row-1;
+	int c=column-1;
+	board[r][c]=n;
+}
 /*
  * creates a board filed with zeroes (empty spaces)
  * we will do this, then populate it from a file with
@@ -47,6 +52,7 @@ void populateBoardFromFile(vector< vector<int> >& board, string filename){
   if(infile.good()){
     for(int r = 0; r < BOARDSIZE ; r++){
       // grab a full line from the file
+	infile >> line;
       for(int c = 0; c < BOARDSIZE ; c++){
 	infile >> cell;
 	board[r][c] = cell;
@@ -76,6 +82,7 @@ void printBoard(vector< vector<int> >& board){
   }
 }
 /*
+
  * Your main program goes here.
  * first get the parameters, check if parameter size is 2
  * first parameter is always the program name in C/C++
@@ -121,13 +128,14 @@ int main(int argc, char* argv[]) {
     if(userChoice == "write"){
       // ask user for position (row,column) and number
       // check if valid (legal) and modify the board or notify that the move is invalid
-int row,column,number;
+	int row,column,number;
 	cout<<"Give me the number of the row"<<endl;
 	cin>>row;
 	cout<<"Give me the number of the column"<<endl;
 	cin>>column;
 	cout<<"Give me the number to enter"<<endl;
 	cin>>number;
+	writeBoard(row,column,number,theBoard);
 
       continue;
     }
