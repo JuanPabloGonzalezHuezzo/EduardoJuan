@@ -7,7 +7,7 @@
 // A01224505
 // and
 // Juan Abdiel Mercado 
-// Student Number
+// A0*******
 
 // Standard libraries
 #include <string>
@@ -20,6 +20,39 @@ using namespace std;
 
 const int BOARDSIZE = 9;
 const int EMPTY = 0;
+
+//Esta función checa que el número que quiere introducir el usuario no esté repetido en la fila que eligió
+bool checkrow(int number, int row, vector< vector<int> >& board){
+int r=row-1;
+int column;
+
+for (int n=0; n<BOARDSIZE; n++)
+{
+  column=board[r][n];
+  if(column==number)
+    {return false; break;}
+}
+
+if(column!=number)
+{return true;}
+}
+
+//Esta función checa que el número que quiere introducir el usuario no esté repetido en la columna que eligió
+bool checkcolumn(int number, int column, vector< vector<int> >& board){
+int c=column-1;
+int row;
+
+for (int n=0; n<BOARDSIZE; n++)
+{
+  row=board[n][c];
+  if(row==number)
+    {return false; break;}
+}
+
+if(row!=number)
+{return true;}
+}
+
 //Codigo del writeBoard que es para poder modificar el tablero
 int writeBoard(int row, int column, int n, vector< vector<int> >& board){
 	int r=row-1;
@@ -27,7 +60,7 @@ int writeBoard(int row, int column, int n, vector< vector<int> >& board){
 	if(board[r][c]<=EMPTY){
 	board[r][c]=n;
 	}else{
-	cout<<"That was not a valid move, try again."<<endl;
+	cout<<"That was not a valid move. You cannot write a number in that space. Try again."<<endl;
 	}
 }
 
@@ -86,13 +119,13 @@ void populateBoardFromFile(vector< vector<int> >& board, string filename){
  */
 void printBoard(vector< vector<int> >& board){
   // nothing for now, you will implement this for Partial 2 project delivery
-  for(int r = 0; r < BOARDSIZE ; r++){
-    for(int c = 0; c < BOARDSIZE ; c++){
-      if(c > 0){
-	cout << " ";
-      }
+  for(int r = 0; r < BOARDSIZE ; r++)
+  {
+    for(int c = 0; c < BOARDSIZE ; c++)
+      { if(c > 0)
+        { cout << " ";}
       cout << board[r][c];
-    }
+      }
     cout << endl;
   }
 }
@@ -152,7 +185,16 @@ int main(int argc, char* argv[]) {
 	cin>>column;
 	cout<<"Give me the number to enter"<<endl;
 	cin>>number;
-	writeBoard(row,column,number,theBoard);
+  checkrow(number, row, theBoard);
+  if(checkrow(number, row, theBoard)==false)
+   {cout<<"You can´t write that number in this row"<<endl;}
+
+  checkcolumn(number, column, theBoard);
+
+ if(checkcolumn(number, column, theBoard)==false)
+  {cout<<"You can´t write that number in this column"<<endl;}
+
+  else{writeBoard(row,column,number,theBoard);}
 
       continue;
     }
