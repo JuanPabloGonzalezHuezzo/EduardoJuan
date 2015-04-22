@@ -25,32 +25,48 @@ const int EMPTY = 0;
 bool checkrow(int number, int row, vector< vector<int> >& board){
 int r=row-1;
 int column;
+int n=0;
+bool v;
 
-for (int n=0; n<BOARDSIZE; n++)
+while (n<BOARDSIZE)
 {
   column=board[r][n];
   if(column==number)
-    {return false; break;}
+    {v=false;}else{v=true;}
+		if(v==false){
+	n=BOARDSIZE;
+	}else{
+		n++;
+		}
 }
+return v;
 
-if(column!=number)
-{return true;}
+//if(column!=number)
+//{return true;}
 }
 
 //Esta función checa que el número que quiere introducir el usuario no esté repetido en la columna que eligió
 bool checkcolumn(int number, int column, vector< vector<int> >& board){
 int c=column-1;
 int row;
+int n=0;
+bool v;
 
-for (int n=0; n<BOARDSIZE; n++)
+while (n<BOARDSIZE)
 {
   row=board[n][c];
   if(row==number)
-    {return false; break;}
+    {v=false;}else{v=true;}
+	if(v==false){
+	n=BOARDSIZE;
+	}else{
+		n++;
+		}
 }
+return v;
 
-if(row!=number)
-{return true;}
+//if(row!=number)
+//{return true;}
 }
 
 //Codigo del writeBoard que es para poder modificar el tablero
@@ -124,9 +140,10 @@ void printBoard(vector< vector<int> >& board){
     for(int c = 0; c < BOARDSIZE ; c++)
       { if(c > 0)
         { cout << " ";}
-      cout << board[r][c];
+      cout << board[r][c]<<"|";
       }
     cout << endl;
+    cout<<"--------------------------"<<endl;
   }
 }
 /*
@@ -185,16 +202,19 @@ int main(int argc, char* argv[]) {
 	cin>>column;
 	cout<<"Give me the number to enter"<<endl;
 	cin>>number;
-  checkrow(number, row, theBoard);
+  
   if(checkrow(number, row, theBoard)==false)
-   {cout<<"You can´t write that number in this row"<<endl;}
+//(number, row, theBoard)==false)
+   {cout<<"You can´t write that number in this row"<<endl;}else{//writeBoard(row,column,number,theBoard);}
 
-  checkcolumn(number, column, theBoard);
+  //checkcolumn(number, column, theBoard);
 
  if(checkcolumn(number, column, theBoard)==false)
-  {cout<<"You can´t write that number in this column"<<endl;}
+//(number, column, theBoard)==false)
+  {cout<<"You can´t write that number in this column"<<endl;}else{writeBoard(row,column,number,theBoard);}
+}
 
-  else{writeBoard(row,column,number,theBoard);}
+  //else{writeBoard(row,column,number,theBoard);}
 
       continue;
     }
