@@ -21,6 +21,12 @@ using namespace std;
 const int BOARDSIZE = 9;
 const int EMPTY = 0;
 
+bool checkrange(int number){
+  if(number<0 || number>BOARDSIZE)
+    {return false;}
+  else{return true;}
+}
+
 //Esta función checa que el número que quiere introducir el usuario no esté repetido en la fila que eligió
 bool checkrow(int number, int row, vector< vector<int> >& board){
 int r=row-1;
@@ -195,24 +201,45 @@ int main(int argc, char* argv[]) {
     if(userChoice == "write"){
       // ask user for position (row,column) and number
       // check if valid (legal) and modify the board or notify that the move is invalid
-	int row,column,number;
+  int row, column, number;
 	cout<<"Give me the number of the row"<<endl;
 	cin>>row;
+  while(row<0 || row>=10)
+    {
+    cout<<"This row does not exist. Try again."<<endl;
+    cout<<"Give me the number of row: "<<endl;
+    cin>>row;
+    }
+
 	cout<<"Give me the number of the column"<<endl;
 	cin>>column;
+   while(column<0 || column>=10)
+    {
+    cout<<"This column does not exist. Try again."<<endl;
+    cout<<"Give me the number of column: "<<endl;
+    cin>>column;
+    }
+
 	cout<<"Give me the number to enter"<<endl;
 	cin>>number;
-  
-  if(checkrow(number, row, theBoard)==false)
-//(number, row, theBoard)==false)
-   {cout<<"You can´t write that number in this row"<<endl;}else{//writeBoard(row,column,number,theBoard);}
 
-  //checkcolumn(number, column, theBoard);
+  if(checkrange(number)==false)
+    {cout<<"Not valid. Your number must be greater than 0 and smaller than 9."<<endl;} 
+ 
+  else {
 
- if(checkcolumn(number, column, theBoard)==false)
-//(number, column, theBoard)==false)
-  {cout<<"You can´t write that number in this column"<<endl;}else{writeBoard(row,column,number,theBoard);}
-}
+    if(checkrow(number, row, theBoard)==false)
+    //(number, row, theBoard)==false)
+     {cout<<"You can´t write that number there. There is already a "<<number<<" in this row."<<endl;}else{//writeBoard(row,column,number,theBoard);}
+
+    //checkcolumn(number, column, theBoard);
+
+    if(checkcolumn(number, column, theBoard)==false)
+    //(number, column, theBoard)==false)
+    {cout<<"You can´t write that number there. There is already a "<<number<<" in this column."<<endl;}else{writeBoard(row,column,number,theBoard);}
+      }
+    }
+    
 
   //else{writeBoard(row,column,number,theBoard);}
 
@@ -236,6 +263,5 @@ int main(int argc, char* argv[]) {
     }
     cout << "That was not a valid choice, try again." << endl;
   } while (userChoice != "quit");
-
   return 0;
 }
