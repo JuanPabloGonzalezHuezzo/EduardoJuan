@@ -21,6 +21,26 @@ using namespace std;
 const int BOARDSIZE = 9;
 const int EMPTY = 0;
 
+bool checkquadrant(vector< vector<int> >& board, int number, int column, int row){
+int r=row-1;
+int c=column-1;
+r=r/3;
+c=c/3;
+
+r=r*3;
+c=c*3;
+
+for(int n=r; n<=r+2; n++)
+{
+  for (int b=c; b<=c+2; b++)
+  {
+    if(board[r][c]==number)
+      {return false;}
+  }
+}
+}
+
+//Esta función checa el rango del número que introduce el usuario 
 bool checkrange(int number){
   if(number<0 || number>BOARDSIZE)
     {return false;}
@@ -223,6 +243,11 @@ int main(int argc, char* argv[]) {
 	cout<<"Give me the number to enter"<<endl;
 	cin>>number;
 
+  if(checkquadrant(theBoard,number,column,row)==false)
+    {cout<<"Sorry, but "<<number<<" is already in this quadrant."<<endl;}
+
+  else{
+
   if(checkrange(number)==false)
     {cout<<"Not valid. Your number must be greater than 0 and smaller than 9."<<endl;} 
  
@@ -239,8 +264,8 @@ int main(int argc, char* argv[]) {
     {cout<<"You can´t write that number there. There is already a "<<number<<" in this column."<<endl;}else{writeBoard(row,column,number,theBoard);}
       }
     }
+  }
     
-
   //else{writeBoard(row,column,number,theBoard);}
 
       continue;
