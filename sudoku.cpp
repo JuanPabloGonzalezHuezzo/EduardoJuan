@@ -29,15 +29,15 @@ c=c/3;
 
 r=r*3;
 c=c*3;
-
 for(int n=r; n<=r+2; n++)
 {
   for (int b=c; b<=c+2; b++)
   {
-    if(board[r][c]==number)
+    if(board[n][b]==number)
       {return false;}
   }
 }
+return true;
 }
 
 //Esta función checa el rango del número que introduce el usuario 
@@ -203,7 +203,13 @@ int main(int argc, char* argv[]) {
   populateBoardFromFile(theBoard,filename);
   theBoard_original=theBoard;
 
-  cout << "Welcome to the Game of Sudoku" << endl;
+  cout << "Welcome to the Game of Sudoku" << endl<<endl;
+  cout<<"Important information."<<endl<<endl;
+  cout<<"print will show you the sudoku board."<<endl;
+  cout<<"write will let you make changes in the board."<<endl;
+  cout<<"erase will let you erase numbers that you wrote and you want to get rid of."<<endl;
+  cout<<"finally, quit will stop the program."<<endl<<endl;
+
   // Here you provide a menu to the user to do what they want
   // The options are:
   //    print (call the printBoard function)
@@ -222,7 +228,7 @@ int main(int argc, char* argv[]) {
       // ask user for position (row,column) and number
       // check if valid (legal) and modify the board or notify that the move is invalid
   int row, column, number;
-	cout<<"Give me the number of the row"<<endl;
+	cout<<"Give me the number of the row (Select from 1 to 9) "<<endl;
 	cin>>row;
   while(row<0 || row>=10)
     {
@@ -231,7 +237,7 @@ int main(int argc, char* argv[]) {
     cin>>row;
     }
 
-	cout<<"Give me the number of the column"<<endl;
+	cout<<"Give me the number of the column (Select from 1 to 9) "<<endl;
 	cin>>column;
    while(column<0 || column>=10)
     {
@@ -240,13 +246,9 @@ int main(int argc, char* argv[]) {
     cin>>column;
     }
 
-	cout<<"Give me the number to enter"<<endl;
+	cout<<"Give me the number to enter (The number must be between 1 and 9) "<<endl;
 	cin>>number;
 
-  if(checkquadrant(theBoard,number,column,row)==false)
-    {cout<<"Sorry, but "<<number<<" is already in this quadrant."<<endl;}
-
-  else{
 
   if(checkrange(number)==false)
     {cout<<"Not valid. Your number must be greater than 0 and smaller than 9."<<endl;} 
@@ -261,10 +263,17 @@ int main(int argc, char* argv[]) {
 
     if(checkcolumn(number, column, theBoard)==false)
     //(number, column, theBoard)==false)
-    {cout<<"You can´t write that number there. There is already a "<<number<<" in this column."<<endl;}else{writeBoard(row,column,number,theBoard);}
+    {cout<<"You can´t write that number there. There is already a "<<number<<" in this column."<<endl;} 
+
+    else{
+    if(checkquadrant(theBoard,number,column,row)==false)
+    {cout<<"Sorry, but "<<number<<" is already in this quadrant."<<endl;}
+
+      else{writeBoard(row,column,number,theBoard);}
       }
     }
   }
+  
     
   //else{writeBoard(row,column,number,theBoard);}
 
