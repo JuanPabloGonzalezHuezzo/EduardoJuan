@@ -18,6 +18,11 @@
 
 using namespace std;
 
+#define RED "\x1b[31m"  
+#define GREEN  "\x1b[32m" 
+#define BLUE "\x1b[34m"
+#define RESET "\x1b[0m" 
+
 const int BOARDSIZE = 9;
 const int EMPTY = 0;
 
@@ -29,21 +34,39 @@ c=c/3;
 
 r=r*3;
 c=c*3;
-for(int n=r; n<=r+2; n++)
-{
-  for (int b=c; b<=c+2; b++)
+  for(int n=r; n<=r+2; n++)
   {
-    if(board[n][b]==number)
+    for (int b=c; b<=c+2; b++)
+    {
+      if(board[n][b]==number)
       {return false;}
+    }
   }
-}
 return true;
+}
+
+bool checkwin(vector< vector<int> >& board){
+int counter=0;
+
+  for(int n=0; n<BOARDSIZE; n++)
+  {
+    for(int b=0; b<BOARDSIZE; b++)
+    {
+      if(board[n][b]!=0)
+        {counter++;}
+    }
+  }
+if(counter==81)
+  {return true;}
+
+else{return false;}
 }
 
 //Esta función checa el rango del número que introduce el usuario 
 bool checkrange(int number){
+
   if(number<0 || number>BOARDSIZE)
-    {return false;}
+  {return false;}
   else{return true;}
 }
 
@@ -160,16 +183,22 @@ void populateBoardFromFile(vector< vector<int> >& board, string filename){
  * NO SPACE at end of row.
  */
 void printBoard(vector< vector<int> >& board){
-  // nothing for now, you will implement this for Partial 2 project delivery
+
   for(int r = 0; r < BOARDSIZE ; r++)
   {
     for(int c = 0; c < BOARDSIZE ; c++)
       { if(c > 0)
-        { cout << " ";}
-      cout << board[r][c]<<"|";
+        { cout << "  ";}
+        if(board[r][c]!=0)
+      {cout <<RED<< board[r][c]<<RESET;}
+        if(board[r][c]==0)
+      {cout <<GREEN<< board[r][c]<<RESET;}  
+      if((c-2)%3==0)
+        {cout<<"|";}
       }
-    cout << endl;
-    cout<<"--------------------------"<<endl;
+    cout << endl<<endl;
+    if((r-2)%3==0)
+    {cout<<"----------------------------"<<endl;}
   }
 }
 /*
@@ -209,6 +238,7 @@ int main(int argc, char* argv[]) {
   cout<<"write will let you make changes in the board."<<endl;
   cout<<"erase will let you erase numbers that you wrote and you want to get rid of."<<endl;
   cout<<"finally, quit will stop the program."<<endl<<endl;
+  cout<<"In case you forget something, Info will show this again."<<endl<<endl;
 
   // Here you provide a menu to the user to do what they want
   // The options are:
@@ -218,12 +248,23 @@ int main(int argc, char* argv[]) {
   //    quit (quit the program)
   string userChoice = "";
   do{
-    cout << "What would you like to do (print, write, erase, quit): ";
+    cout << "What would you like to do (print, write, erase, info, quit): ";
     cin >> userChoice;
     if(userChoice == "print"){
       printBoard(theBoard);
       continue;
     }
+
+    if (userChoice == "Info" || userChoice == "info"){
+  cout<<endl;
+  cout<<"print will show you the sudoku board."<<endl;
+  cout<<"write will let you make changes in the board."<<endl;
+  cout<<"erase will let you erase numbers that you wrote and you want to get rid of."<<endl;
+  cout<<"finally, quit will stop the program."<<endl<<endl;
+
+  continue;
+  }
+
     if(userChoice == "write"){
       // ask user for position (row,column) and number
       // check if valid (legal) and modify the board or notify that the move is invalid
@@ -251,7 +292,7 @@ int main(int argc, char* argv[]) {
 
 
   if(checkrange(number)==false)
-    {cout<<"Not valid. Your number must be greater than 0 and smaller than 9."<<endl;} 
+    {cout<<"Not valid. Your number must be greater than 0 and smaller than 9. Try again."<<endl;}
  
   else {
 
@@ -273,6 +314,9 @@ int main(int argc, char* argv[]) {
       }
     }
   }
+
+  if(checkwin(theBoard)==true)
+    {cout<<"Congratulations. You solved Sudoku."<<endl;}
   
     
   //else{writeBoard(row,column,number,theBoard);}
