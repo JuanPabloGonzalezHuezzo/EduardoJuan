@@ -237,7 +237,10 @@ int main(int argc, char* argv[]) {
   theBoard_original=theBoard;
 
   cout << "Welcome to the Game of Sudoku" << endl<<endl;
-  cout<<"Important information."<<endl<<endl;
+  cout<<RED<<"Important information."<<RESET<<endl<<endl;
+  cout<<GREEN<<"The green numbers are the empty spaces. You have to put a number there."<<RESET<<endl;
+  cout<<RED<<"The red numbers are the original ones. They cannot be changed."<<RESET<<endl;
+  cout<<BLUE<<"The blue numbers are the ones you introduce."<<RESET<<endl<<endl;
   cout<<"print will show you the sudoku board."<<endl;
   cout<<"write will let you make changes in the board."<<endl;
   cout<<"erase will let you erase numbers that you wrote and you want to get rid of."<<endl;
@@ -261,6 +264,9 @@ int main(int argc, char* argv[]) {
 
     if (userChoice == "Info" || userChoice == "info"){
   cout<<endl;
+  cout<<GREEN<<"The green numbers are the empty spaces. You have to put a number there."<<RESET<<endl;
+  cout<<RED<<"The red numbers are the original ones. They cannot be changed."<<RESET<<endl;
+  cout<<BLUE<<"The blue numbers are the ones you introduce."<<RESET<<endl<<endl;
   cout<<"print will show you the sudoku board."<<endl;
   cout<<"write will let you make changes in the board."<<endl;
   cout<<"erase will let you erase numbers that you wrote and you want to get rid of."<<endl;
