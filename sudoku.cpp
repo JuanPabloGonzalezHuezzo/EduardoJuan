@@ -182,17 +182,20 @@ void populateBoardFromFile(vector< vector<int> >& board, string filename){
  * Each cell is separated by a space
  * NO SPACE at end of row.
  */
-void printBoard(vector< vector<int> >& board){
+void printBoard(vector< vector<int> >& board, vector< vector<int> >& theBoard_original){
 
   for(int r = 0; r < BOARDSIZE ; r++)
   {
     for(int c = 0; c < BOARDSIZE ; c++)
       { if(c > 0)
         { cout << "  ";}
-        if(board[r][c]!=0)
+        if(theBoard_original[r][c]!=0)
       {cout <<RED<< board[r][c]<<RESET;}
         if(board[r][c]==0)
-      {cout <<GREEN<< board[r][c]<<RESET;}  
+      {cout <<GREEN<< board[r][c]<<RESET;} 
+        if(board[r][c]!=0 && theBoard_original[r][c]==0)
+      {cout <<BLUE<< board[r][c]<<RESET;} 
+
       if((c-2)%3==0)
         {cout<<"|";}
       }
@@ -201,6 +204,7 @@ void printBoard(vector< vector<int> >& board){
     {cout<<"----------------------------"<<endl;}
   }
 }
+
 /*
 
  * Your main program goes here.
@@ -251,7 +255,7 @@ int main(int argc, char* argv[]) {
     cout << "What would you like to do (print, write, erase, info, quit): ";
     cin >> userChoice;
     if(userChoice == "print"){
-      printBoard(theBoard);
+      printBoard(theBoard,theBoard_original);
       continue;
     }
 
