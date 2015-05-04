@@ -256,11 +256,8 @@ int main(int argc, char* argv[]) {
   //    quit (quit the program)
   string userChoice = "";
   do{
-<<<<<<< HEAD
+
     cout << "What would you like to do (print, write, erase, info, quit, history, reset): ";
-=======
-    cout << "What would you like to do (print, write, erase, info, reset, quit): ";
->>>>>>> a605b9d33715066acb8fc9b03fae54ce18a46b9f
     cin >> userChoice;
 
     if(userChoice == "print"){
