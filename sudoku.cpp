@@ -7,7 +7,7 @@
 // A01224505
 // and
 // Juan Abdiel Mercado 
-// A0*******
+// A01229754
 
 // Standard libraries
 #include <string>
@@ -204,7 +204,6 @@ void printBoard(vector< vector<int> >& board, vector< vector<int> >& theBoard_or
     {cout<<"----------------------------"<<endl;}
   }
 }
-
 /*
 
  * Your main program goes here.
@@ -244,6 +243,7 @@ int main(int argc, char* argv[]) {
   cout<<"print will show you the sudoku board."<<endl;
   cout<<"write will let you make changes in the board."<<endl;
   cout<<"erase will let you erase numbers that you wrote and you want to get rid of."<<endl;
+  cout<<"reset will erase all the values you have written so far."<<endl;
   cout<<"finally, quit will stop the program."<<endl<<endl;
   cout<<"In case you forget something, Info will show this again."<<endl<<endl;
 
@@ -255,12 +255,14 @@ int main(int argc, char* argv[]) {
   //    quit (quit the program)
   string userChoice = "";
   do{
-    cout << "What would you like to do (print, write, erase, info, quit): ";
+    cout << "What would you like to do (print, write, erase, info, reset, quit): ";
     cin >> userChoice;
+
     if(userChoice == "print"){
       printBoard(theBoard,theBoard_original);
       continue;
     }
+
 
     if (userChoice == "Info" || userChoice == "info"){
   cout<<endl;
@@ -270,9 +272,18 @@ int main(int argc, char* argv[]) {
   cout<<"print will show you the sudoku board."<<endl;
   cout<<"write will let you make changes in the board."<<endl;
   cout<<"erase will let you erase numbers that you wrote and you want to get rid of."<<endl;
+  cout<<"reset will erase all the values you have written so far."<<endl;
   cout<<"finally, quit will stop the program."<<endl<<endl;
 
   continue;
+  }
+
+  if(userChoice == "reset" || userChoice == "Reset"){
+  createZeroBoard(theBoard);
+  populateBoardFromFile(theBoard,filename);
+  theBoard_original=theBoard;
+  printBoard(theBoard, theBoard_original);
+    continue;
   }
 
     if(userChoice == "write"){
