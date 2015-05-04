@@ -66,7 +66,7 @@ else{return false;}
 //Esta función checa el rango del número que introduce el usuario 
 bool checkrange(int number){
 
-  if(number<0 || number>BOARDSIZE)
+  if(number<=0 || number>BOARDSIZE)
   {return false;}
   else{return true;}
 }
@@ -304,7 +304,7 @@ int main(int argc, char* argv[]) {
   int row, column, number;
 	cout<<"Give me the number of the row (Select from 1 to 9) "<<endl;
 	cin>>row;
-  while(row<0 || row>=10)
+  while(row<=0 || row>=10)
     {
     cout<<"This row does not exist. Try again."<<endl;
     cout<<"Give me the number of row: "<<endl;
@@ -313,7 +313,7 @@ int main(int argc, char* argv[]) {
 
 	cout<<"Give me the number of the column (Select from 1 to 9) "<<endl;
 	cin>>column;
-   while(column<0 || column>=10)
+   while(column<=0 || column>=10)
     {
     cout<<"This column does not exist. Try again."<<endl;
     cout<<"Give me the number of column: "<<endl;
