@@ -21,6 +21,7 @@ using namespace std;
 #define RED "\x1b[31m"  
 #define GREEN  "\x1b[32m" 
 #define BLUE "\x1b[34m"
+#define YELLOW "\x1b[33m"
 #define RESET "\x1b[0m" 
 
 const int BOARDSIZE = 9;
@@ -255,11 +256,18 @@ int main(int argc, char* argv[]) {
   //    quit (quit the program)
   string userChoice = "";
   do{
-    cout << "What would you like to do (print, write, erase, info, quit): ";
+    cout << "What would you like to do (print, write, erase, info, quit, history, reset): ";
     cin >> userChoice;
     if(userChoice == "print"){
       printBoard(theBoard,theBoard_original);
       continue;
+    }
+    
+    if(userChoice == "reset"){
+     createZeroBoard(theBoard);
+  populateBoardFromFile(theBoard,filename);
+     cout<< "Sudoku reset!!!"<<endl;
+     continue;
     }
 
     if (userChoice == "Info" || userChoice == "info"){
@@ -348,6 +356,19 @@ int main(int argc, char* argv[]) {
     if(userChoice == "quit"){
       cout << "Thanks for playing our game, have a great day!" << endl;
       continue;
+    }
+    
+    if(userChoice == "history"){
+      cout<< endl;
+      cout<<YELLOW<< "Sudoku (en japonés: 数独, sūdoku) es un juego matemático que se publicó por primera vez a finales de la década de 1970 y se popularizó en Japón en 1986, dándose a conocer en el ámbito internacional en 2005 cuando numerosos periódicos empezaron a publicarlo en su sección de pasatiempos."<<endl; 
+      cout<<YELLOW<< "El objetivo del sudoku es rellenar una cuadrícula de 9 × 9 celdas (81 casillas) dividida en subcuadrículas de 3 × 3 (también llamadas cajas o regiones) con las cifras del 1 al 9 partiendo de algunos números ya dispuestos en algunas de las celdas."<<endl; 
+      cout<<YELLOW<< "Aunque se podrían usar colores, letras, figuras, se conviene en usar números para mayor claridad, lo que importa, es que sean nueve elementos diferenciados, que no se deben repetir en una misma fila, columna o subcuadrícula."<<endl; 
+      cout<<YELLOW<< "Un sudoku está bien planteado si la solución es única, algo que el matemático Gary McGuire ha demostrado que no es posible si no hay un mínimo de 17 cifras de pista al principio."<< endl;
+      cout<<YELLOW<< "La solución de un sudoku siempre es un cuadrado latino, aunque el recíproco en general no es cierto ya que el sudoku establece la restricción añadida de que no se puede repetir un mismo número en una región."<<endl;
+      cout<<YELLOW<<"FOR MORE INFORMATION SEE: http://es.wikipedia.org/wiki/Sudoku"<<endl;
+      cout<< RESET;
+      cout<< endl;
+      continue; 
     }
     cout << "That was not a valid choice, try again." << endl;
   } while (userChoice != "quit");
