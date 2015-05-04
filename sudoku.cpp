@@ -65,7 +65,7 @@ else{return false;}
 //Esta función checa el rango del número que introduce el usuario 
 bool checkrange(int number){
 
-  if(number<0 || number>BOARDSIZE)
+  if(number<=0 || number>BOARDSIZE)
   {return false;}
   else{return true;}
 }
