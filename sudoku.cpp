@@ -27,6 +27,7 @@ using namespace std;
 const int BOARDSIZE = 9;
 const int EMPTY = 0;
 
+//Esta función checa que el número introducido no se repita en el cuadrante
 bool checkquadrant(vector< vector<int> >& board, int number, int column, int row){
 int r=row-1;
 int c=column-1;
@@ -46,6 +47,7 @@ c=c*3;
 return true;
 }
 
+//Esta función checa si todos los elementos de los vectores tienen un valore diferente de 0 para checar si el usuario ha ganado 
 bool checkwin(vector< vector<int> >& board){
 int counter=0;
 
@@ -285,14 +287,6 @@ int main(int argc, char* argv[]) {
   cout<<"finally, quit will stop the program."<<endl<<endl;
 
   continue;
-  }
-
-  if(userChoice == "reset" || userChoice == "Reset"){
-  createZeroBoard(theBoard);
-  populateBoardFromFile(theBoard,filename);
-  theBoard_original=theBoard;
-  printBoard(theBoard, theBoard_original);
-    continue;
   }
 
     if(userChoice == "write"){
